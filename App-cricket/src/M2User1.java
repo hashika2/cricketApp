@@ -6,16 +6,13 @@
 
 /**
  *
- * @author Hashika
+ * @author Hashika maduranga
  */
-class User {
-    
-    private int id,runs,balls,minutes,fours,sixes,SR;
-    private String player,wicket;
-    
-   
-    
-    public User(int id,String wicket,int runs,int balls,int minutes,int fours,int sixes,int SR,String player){
+public class M2User1 {
+      private int id,runs,balls,minutes,fours,sixes,SR;
+      private String player,wicket;
+       
+        public M2User1(int id,String wicket,int runs,int balls,int minutes,int fours,int sixes,int SR,String player){
         //this.id=id;
         this.wicket=wicket;
         this.balls=balls;
@@ -29,17 +26,6 @@ class User {
         
     }
 
-    User(int aInt, int aInt0, int aInt1, int aInt2, int aInt3, int aInt4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-   
-    
-
-     
-
-   
-   
-
     /**
      * @return the id
      */
@@ -52,20 +38,6 @@ class User {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return the wicket
-     */
-    public String getWicket() {
-        return wicket;
-    }
-
-    /**
-     * @param wicket the wicket to set
-     */
-    public void setWicket(String wicket) {
-        this.wicket = wicket;
     }
 
     /**
@@ -166,6 +138,20 @@ class User {
         this.player = player;
     }
 
+    /**
+     * @return the wicket
+     */
+    public String getWicket() {
+        return wicket;
+    }
+
+    /**
+     * @param wicket the wicket to set
+     */
+    public void setWicket(String wicket) {
+        this.wicket = wicket;
+    }
+    
     Object getName() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -190,11 +176,4 @@ class User {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * @return the name
-     */
-    
-    
 }
-    
-
