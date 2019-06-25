@@ -1,10 +1,13 @@
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,11 +26,19 @@ public class Match2 extends javax.swing.JFrame {
      */
     public Match2() {
         initComponents();
+        show_user("First_Inning");
+        show_user1("First_Inning");
+    }
+     public void close(){
+        
+        WindowEvent winClosingEvent=new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+        
     }
 
     
-        public ArrayList<User> userList(String A){
-        ArrayList<User>userList=new ArrayList<User>();
+        public ArrayList<User> userList2(String A){
+        ArrayList<User>userList2=new ArrayList<User>();
         
       
         if(A=="First_Inning"){
@@ -36,20 +47,20 @@ public class Match2 extends javax.swing.JFrame {
             // String url="jdbc:sqlserver://localhost:4200;databaseName=cricketdata;user=root;password=";
              Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cricketdata","root","");
              
-             String query1="SELECT * FROM Match2_inning1";
+             String query1="SELECT * FROM match2_inning1";
            
              
              java.sql.Statement st=con.createStatement();
              ResultSet rs=st.executeQuery(query1);
              
+              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
              
-             
-             M2User1 user;
-             while(rs.next()){
-                 user=new M2User1(rs.getInt("id"),rs.getString("wicket"),rs.getInt("runs"),rs.getInt("balls"),rs.getInt("minutes"),rs.getInt("4s"),rs.getInt("6s"),rs.getInt("SR"),rs.getString("player"));
-                 userList.add(user);
-             }
-            
+//             User user;
+//             while(rs.next()){
+//                 user=new User(rs.getInt("id"),rs.getString("wicket"),rs.getInt("runs"),rs.getInt("balls"),rs.getInt("minutes"),rs.getInt("4s"),rs.getInt("6s"),rs.getInt("SR"),rs.getString("player"));
+//                 userList2.add(user);
+//             }
+//            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
@@ -62,16 +73,17 @@ public class Match2 extends javax.swing.JFrame {
             // String url="jdbc:sqlserver://localhost:4200;databaseName=cricketdata;user=root;password=";
              Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cricketdata","root","");
              
-             String query1="SELECT * FROM inning2";
+             String query1="SELECT * FROM match2_inning2";
              
              java.sql.Statement st=con.createStatement();
              ResultSet rs=st.executeQuery(query1);
              
-             M2User1 user;
-             while(rs.next()){
-                 user=new M2User1(rs.getInt("id"),rs.getString("wicket"),rs.getInt("runs"),rs.getInt("balls"),rs.getInt("minutes"),rs.getInt("4s"),rs.getInt("6s"),rs.getInt("SR"),rs.getString("player"));
-                 userList.add(user);
-             }
+              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+//             User user;
+//             while(rs.next()){
+//                 user=new User(rs.getInt("id"),rs.getString("wicket"),rs.getInt("runs"),rs.getInt("balls"),rs.getInt("minutes"),rs.getInt("4s"),rs.getInt("6s"),rs.getInt("SR"),rs.getString("player"));
+//                 userList2.add(user);
+//             }
              
         }
         catch(Exception e){
@@ -79,15 +91,15 @@ public class Match2 extends javax.swing.JFrame {
     }
         }
          
-        return userList;
+        return userList2;
        
     }
         
         public void show_user(String input){
          
-        ArrayList<User> list=userList(input);
+        ArrayList<User> list=userList2(input);
      
-        DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+    /*    DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
         Object[] row = new Object[9];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getPlayer();
@@ -103,7 +115,7 @@ public class Match2 extends javax.swing.JFrame {
             
             
             model.addRow(row);
-        }
+        }*/
     }
     
     
@@ -111,13 +123,14 @@ public class Match2 extends javax.swing.JFrame {
         
         if(getstring=="First_Inning"){
             
-            userList(getstring);
+            userList2(getstring);
             userList1(getstring);
             // cricket cr=new cricket();
              //cr.setVisible(true);
         }
         else if(getstring=="Second_Inning"){
-             userList(getstring);
+             userList2(getstring);
+             userList1(getstring);
         }
     }
        public ArrayList<User1> userList1(String A){
@@ -130,19 +143,19 @@ public class Match2 extends javax.swing.JFrame {
             // String url="jdbc:sqlserver://localhost:4200;databaseName=cricketdata;user=root;password=";
              Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cricketdata","root","");
              
-             String query2="SELECT * FROM inning1ball";
+             String query2="SELECT * FROM Match2_inning1ball";
           
              
              java.sql.Statement st1=con.createStatement();
              ResultSet rs1=st1.executeQuery(query2);
              
+              jTable5.setModel(DbUtils.resultSetToTableModel(rs1));
              
-             
-             User1 user1;
-             while(rs1.next()){
-                  user1=new User1(rs1.getInt("id1"),rs1.getInt("wickets"),rs1.getInt("run"),rs1.getInt("maidens"),rs1.getInt("economy"),rs1.getInt("overs"),rs1.getString("name"));
-                 userList1.add(user1);
-             }
+//             User1 user1;
+//             while(rs1.next()){
+//                  user1=new User1(rs1.getInt("id1"),rs1.getInt("wickets"),rs1.getInt("run"),rs1.getInt("maidens"),rs1.getInt("economy"),rs1.getInt("overs"),rs1.getString("name"));
+//                   userList1.add(user1);
+//             }
              
         }
         catch(Exception e){
@@ -156,17 +169,19 @@ public class Match2 extends javax.swing.JFrame {
             // String url="jdbc:sqlserver://localhost:4200;databaseName=cricketdata;user=root;password=";
              Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cricketdata","root","");
              
-             String query1="SELECT * FROM inning2ball";
+             String query1="SELECT * FROM Match2_inning2ball";
              
              java.sql.Statement st=con.createStatement();
              ResultSet rs=st.executeQuery(query1);
              
-             User1 user1;
-             while(rs.next()){
-                 user1=new User1(rs.getInt("id1"),rs.getInt("wickets"),rs.getInt("run"),rs.getInt("maidens"),rs.getInt("economy"),rs.getInt("overs"),rs.getString("name"));
-                 userList1.add(user1);
-             }
+              jTable5.setModel(DbUtils.resultSetToTableModel(rs));
              
+//             User1 user1;
+//             while(rs.next()){
+//                 user1=new User1(rs.getInt("id1"),rs.getInt("wickets"),rs.getInt("run"),rs.getInt("maidens"),rs.getInt("economy"),rs.getInt("overs"),rs.getString("name"));
+//                 userList1.add(user1);
+//             }
+//             
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
@@ -180,7 +195,7 @@ public class Match2 extends javax.swing.JFrame {
          
         ArrayList<User1> list=userList1(input);
      
-        DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
+       /* DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
         Object[] row1 = new Object[6];
         for(int i=0;i<list.size();i++){
             row1[0]=list.get(i).getName();
@@ -196,7 +211,7 @@ public class Match2 extends javax.swing.JFrame {
             
             
             model.addRow(row1);
-        }
+        }*/
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,6 +236,7 @@ public class Match2 extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -255,7 +271,10 @@ public class Match2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(102, 102, 0));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("Micromax Cup");
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -295,43 +314,49 @@ public class Match2 extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(jTable5);
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(190, 190, 190))
+                .addGap(281, 281, 281)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(60, 60, 60))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -340,7 +365,7 @@ public class Match2 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,35 +390,26 @@ public class Match2 extends javax.swing.JFrame {
         if(select=="First_Inning"){
 
             jButton2.setText((String) jComboBox1.getSelectedItem());
-            DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-            dm.getDataVector().removeAllElements();
-            dm.fireTableDataChanged(); // notifies the JTable that the model has changed
+           
             selectedItem(select);
             show_user(select);
         }
         else if(select=="Second_Inning"){
             jButton2.setText((String) jComboBox1.getSelectedItem());
-            DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-            dm.getDataVector().removeAllElements();
-            dm.fireTableDataChanged(); // notifies the JTable that the model has changed
+            
 
             selectedItem(select);
             show_user(select);
         }
-        else{
-
-            Match1Summery m1s=new Match1Summery();
-            m1s.setVisible(true);
-            /*   jButton2.setText((String) jComboBox1.getSelectedItem());
-            DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-            dm.getDataVector().removeAllElements();
-            dm.fireTableDataChanged(); // notifies the JTable that the model has changed
-
-            selectedItem(select);
-            show_user(select);*/
-        }
+       
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         close();
+        Match1Summery ms=new   Match1Summery();
+        ms.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,6 +447,7 @@ public class Match2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
