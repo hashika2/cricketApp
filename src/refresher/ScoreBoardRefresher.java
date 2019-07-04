@@ -86,8 +86,8 @@ public class ScoreBoardRefresher implements Refresher{
         ResultSet rs=showTable.getBatting(matchId);
         ResultSet rs2=showTable.getBalling(matchId);
 
-        gui.getOutput().get("table1").setModel(DbUtils.resultSetToTableModel(rs));
-        gui.getOutput().get("table1").setModel(DbUtils.resultSetToTableModel(rs2));
+        gui.getOutput().get("Table1").setModel(DbUtils.resultSetToTableModel(rs));
+        gui.getOutput().get("Table1").setModel(DbUtils.resultSetToTableModel(rs2));
 
 
     }
