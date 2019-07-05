@@ -45,16 +45,21 @@ public class ShowWinnigTeam {
             System.out.println("match drown");
         }
   */
-        String runs1="select * from batting where inning=1 and matchid= "+matchId;
+        String runsInOne="select * from batting where inning=1 and matchid= "+matchId;
+        String runsInTwo="select * from batting where inning=2 and matchid= "+matchId;
         java.sql.Statement stmt1 = con.createStatement();
-        ResultSet rs = stmt1.executeQuery(runs1);
+        java.sql.Statement stmt2 = con.createStatement();
+        ResultSet rs = stmt1.executeQuery(runsInOne);
+        ResultSet rs1 = stmt2.executeQuery(runsInTwo);
         ArrayList<GetSummerydetails> sm=new ArrayList<GetSummerydetails>();
 
 
         //while loop
         GetSummerydetails gsd=new GetSummerydetails();
-        int total = gsd.showDetails(rs);
-        System.out.println(total);
+        int totalInnOne = gsd.showDetails(rs);
+        int totalInnTwo=gsd.showDetails(rs1);
+        System.out.println(totalInnOne);
+        System.out.println(totalInnTwo);
 
 
     }
