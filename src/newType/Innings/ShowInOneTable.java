@@ -23,8 +23,7 @@ public class ShowInOneTable {
         try {
 
             String first_in = "select b.Name,b.Out,b.Runs ,b.4s,b.6s,b.Balls,b.Strike from matches m, batting b where b.inning=1 and  b.matchid=" + matchId;
-            //String query1 = "SELECT b.Name,b.Wickets,b.Overs,b.Runs,b.Maidens,b.Economy FROM  matches m,bawler b where b.inning=1 and b.matchid= " + matchId;
-            //String runs = "select runs from batting where inning=1 and matchid= " + matchId;
+
 
             java.sql.Statement st1 = con.createStatement();
 
@@ -41,15 +40,9 @@ public class ShowInOneTable {
 
 
         try {
-
-            //String first_in = "select b.Name,b.Out,b.Runs ,b.4s,b.6s,b.Balls,b.Strike from matches m, batting b where b.inning=1 and  b.matchid=" + matchId;
             String query1 = "SELECT b.Name,b.Wickets,b.Overs,b.Runs,b.Maidens,b.Economy FROM  matches m,bawler b where b.inning=1 and b.matchid= " + matchId;
-            //String runs = "select runs from batting where inning=1 and matchid= " + matchId;
-
 
             java.sql.Statement st2 = con.createStatement();
-
-
             rs2 = st2.executeQuery(query1);
 
 

@@ -20,7 +20,7 @@ public class ShowWinnigTeam {
     public String showTeam(String matchId) throws SQLException {
 
 
-        String runsInOne="select * from batting where inning=1 and matchid= "+matchId;
+        String runsInOne="select * from batting b,Match m  where b.inning=1 and b.matchid= "+matchId;
         String runsInTwo="select * from batting where inning=2 and matchid= "+matchId;
         java.sql.Statement stmt1 = con.createStatement();
         java.sql.Statement stmt2 = con.createStatement();
@@ -28,14 +28,13 @@ public class ShowWinnigTeam {
         ResultSet rs1 = stmt2.executeQuery(runsInTwo);
         ArrayList<GetSummerydetails> sm=new ArrayList<GetSummerydetails>();
 
+        //show who won the match
 
         //while loop
         GetSummerydetails gsd=new GetSummerydetails();
          totalInnOne = gsd.showDetails(rs);
          totalInnTwo=gsd.showDetails(rs1);
-        //String setString=Integer.toString(totalInnOne);
-       // System.out.println(totalInnOne);
-        //System.out.println(totalInnTwo);
+
         win=Math.abs(totalInnOne-totalInnTwo);
         String setWin=Integer.toString(win);
 

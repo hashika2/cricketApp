@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 import Innings.ShowInOneTable;
 import Innings.ShowInTwoTable;
@@ -23,7 +23,7 @@ public class Home extends JFrame {
     // int totalRuns=0;
     Connection con = null;
 
-     Home() {
+     public Home() {
         //this  uses the form designer form
         add(Rootpanel);
         setTitle("This is my Cricket app");
@@ -35,7 +35,7 @@ public class Home extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ShowSummery showSummery=new ShowSummery(con);
-               // showSummery.userList(id.getText().toString());
+
                 userList(id.getText().toString());
             }
         });
@@ -53,18 +53,10 @@ public class Home extends JFrame {
                 Object selected = comboBox1.getSelectedItem();
 
                 if(selected.toString().equals("First Inning")) {
-                    try {
-                        showComboBoxInnOne(id.getText().toString());
-                    } catch (SQLException e1) {
-                        e1.printStackTrace();
-                    }
+                    showComboBoxInnOne(id.getText());
                 }
                 else if(selected.toString().equals("Second Inning")) {
-                    try {
-                        showComboBoxInnTwo(id.getText().toString());
-                    } catch (SQLException e1) {
-                        e1.printStackTrace();
-                    }
+                    showComboBoxInnTwo(id.getText());
                 }
             }
         });
@@ -82,7 +74,7 @@ public class Home extends JFrame {
            ShowWinnigTeam showWinnigTeam=new ShowWinnigTeam(con);
            String win=showWinnigTeam.showTeam(matchId);
 
-           // this.match.setText(rs2.getString("Match"));
+
             table1.setModel(DbUtils.resultSetToTableModel(rs1));
             winSum.setText("Match won by "+win+" runs");
 
@@ -94,49 +86,35 @@ public class Home extends JFrame {
 
     }
 
-   public void showComboBoxInnOne(String matchId) throws SQLException {
-
-//            String first_in = "select b.Name,b.Out,b.Runs ,b.4s,b.6s,b.Balls,b.Strike from matches m, batting b where b.inning=1 and  b.matchid="+ matchId ;
-//            String query1 = "SELECT b.Name,b.Wickets,b.Overs,b.Runs,b.Maidens,b.Economy FROM  matches m,bawler b where b.inning=1 and b.matchid= "+ matchId;
-//            String runs="select runs from batting where inning=1 and matchid= "+matchId;
-//
-//            java.sql.Statement st1 = con.createStatement();
-//            java.sql.Statement st2 = con.createStatement();
-//            java.sql.Statement st3 = con.createStatement();
-//            ResultSet rs = st1.executeQuery(first_in);
-//            ResultSet rs2 = st2.executeQuery(query1);
-//            ResultSet rs3 = st3.executeQuery(runs);
-            
+   public void showComboBoxInnOne(String matchId)  {
 
 
-
-          ShowInOneTable showTable=new ShowInOneTable(con);
-          ResultSet rs=showTable.getTableInningOneBatting(matchId);
-          ResultSet rs2=showTable.getTableInningOneBalling(matchId);
+        try {
+            ShowInOneTable showTable = new ShowInOneTable(con);
+            ResultSet rs = showTable.getTableInningOneBatting(matchId);
+            ResultSet rs2 = showTable.getTableInningOneBalling(matchId);
 
             //show datas in table
             table1.setModel(DbUtils.resultSetToTableModel(rs));
             table2.setModel(DbUtils.resultSetToTableModel(rs2));
-
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
 
    }
 
-    public void showComboBoxInnTwo(String matchId) throws SQLException {
+    public void showComboBoxInnTwo(String matchId)  {
 
-//        String first_in = "select b.Name,b.Out,b.Runs ,b.4s,b.6s,b.Balls,b.Strike from matches m, batting b where b.inning=2 and m.Mid = b.matchid="+ matchId ;
-//        String query1 = "SELECT b.Name,b.Wickets,b.Overs,b.Runs,b.Maidens,b.Economy FROM  matches m,bawler b where b.inning=2 and m.Mid= "+ matchId;
-//
-//        java.sql.Statement st1 = con.createStatement();
-//        java.sql.Statement st2 = con.createStatement();
-//        ResultSet rs = st1.executeQuery(first_in);
-//        ResultSet rs2 = st2.executeQuery(query1);
+        try {
+            ShowInTwoTable showTable = new ShowInTwoTable(con);
+            ResultSet rs = showTable.getTableInningSecondBatting(matchId);
+            ResultSet rs2 = showTable.getTableInningSecondBalling(matchId);
 
-        ShowInTwoTable showTable=new ShowInTwoTable(con);
-        ResultSet rs=showTable.getTableInningSecondBatting(matchId);
-        ResultSet rs2=showTable.getTableInningSecondBalling(matchId);
-
-        table1.setModel(DbUtils.resultSetToTableModel(rs));
-        table2.setModel(DbUtils.resultSetToTableModel(rs2));
+            table1.setModel(DbUtils.resultSetToTableModel(rs));
+            table2.setModel(DbUtils.resultSetToTableModel(rs2));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
 
 
     }
