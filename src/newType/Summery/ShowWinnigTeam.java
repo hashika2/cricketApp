@@ -1,4 +1,6 @@
-import com.connector.DbConnector;
+package Summery;
+
+import Summery.GetSummerydetails;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

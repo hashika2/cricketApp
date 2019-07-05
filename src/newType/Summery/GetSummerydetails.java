@@ -1,3 +1,5 @@
+package Summery;
+
 import java.sql.ResultSet;
 
 public class GetSummerydetails {

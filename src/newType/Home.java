@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Innings.ShowInOneTable;
+import Innings.ShowInTwoTable;
+import Summery.ShowSummery;
+import Summery.ShowWinnigTeam;
 import com.connector.DbConnector;
 import net.proteanit.sql.DbUtils;
 
@@ -106,7 +110,7 @@ public class Home extends JFrame {
 
 
 
-          ShowTable showTable=new ShowTable(con);
+          ShowInOneTable showTable=new ShowInOneTable(con);
           ResultSet rs=showTable.getTableInningOneBatting(matchId);
           ResultSet rs2=showTable.getTableInningOneBalling(matchId);
 
@@ -127,7 +131,7 @@ public class Home extends JFrame {
 //        ResultSet rs = st1.executeQuery(first_in);
 //        ResultSet rs2 = st2.executeQuery(query1);
 
-        ShowTable2 showTable=new ShowTable2(con);
+        ShowInTwoTable showTable=new ShowInTwoTable(con);
         ResultSet rs=showTable.getTableInningSecondBatting(matchId);
         ResultSet rs2=showTable.getTableInningSecondBalling(matchId);
 

@@ -1,10 +1,12 @@
+package Innings;
+
 import com.connector.DbConnector;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class ShowTable2 {
+public class ShowInTwoTable {
 
     ResultSet rs1 = null;
 
@@ -12,7 +14,7 @@ public class ShowTable2 {
 
     Connection con = null;
 
-    public ShowTable2(Connection con) {
+    public ShowInTwoTable(Connection con) {
         this.con = con;
     }
 
