@@ -14,7 +14,7 @@ public class Home extends JFrame {
     private JPanel Rootpanel;
     private JTable table1;
     private JTable table2;
-    private JTextField textField3;
+    private JTextField winSum;
 
     // int totalRuns=0;
     Connection con = null;
@@ -76,10 +76,11 @@ public class Home extends JFrame {
            ResultSet rs1 = showSummery.setShowSummery(matchId);
 
            ShowWinnigTeam showWinnigTeam=new ShowWinnigTeam(con);
-           showWinnigTeam.showTeam(matchId);
+           String win=showWinnigTeam.showTeam(matchId);
 
            // this.match.setText(rs2.getString("Match"));
             table1.setModel(DbUtils.resultSetToTableModel(rs1));
+            winSum.setText("Match won by "+win+" runs");
 
 
 

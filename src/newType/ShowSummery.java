@@ -17,8 +17,8 @@ public class ShowSummery {
         ResultSet rs1 = null;
 
         try {
-            String overView = "select m.Match,m.inningOne,m.inningTwo,m.Winning from matches m where m.Mid = " + matchId;
-            //String match="select Match from matches where Mid = '"+ matchId+"'";
+            String overView = "select m.Match,m.inningOne,m.inningTwo,m.Most_runs,m.Most_wickets from matches m where m.Mid = " + matchId;
+
 
             java.sql.Statement st = this.con.createStatement();
             rs1 = st.executeQuery(overView);
