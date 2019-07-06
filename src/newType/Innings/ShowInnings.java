@@ -19,18 +19,16 @@ public class ShowInnings implements ShowTable{
     public ShowInnings(Connection con) {
         this.con = con;
     }
+    Queries queries=new Queries();
 
     @Override
     public ResultSet getTableInningBatting(String matchId,int inning) {
 
         try {
 
-           String first_in = "select b.Name,b.Out,b.Runs ,b.4s,b.6s,b.Balls,b.Strike from batting b where b.inning= "+inning+" and  b.matchid= "+matchId;
-
-
-            java.sql.Statement st1 = con.createStatement();
-
-             rs = st1.executeQuery(first_in);
+           String first_in = queries.setBattingQueries(matchId,inning);
+           java.sql.Statement st1 = con.createStatement();
+           rs = st1.executeQuery(first_in);
 
 
         } catch (Exception e) {
@@ -43,10 +41,8 @@ public class ShowInnings implements ShowTable{
 
 
         try {
-            Queries queries=new Queries();
-            String query1=queries.setBattingQueries(matchId,inning);
-          //  String query1 = "SELECT b.Name,b.Wickets,b.Overs,b.Runs,b.Maidens,b.Economy FROM  bawler b where b.inning="+inning+" and b.matchid= " + matchId;
 
+            String query1=queries.setBallingQueries(matchId,inning);
             java.sql.Statement st2 = con.createStatement();
             rs2 = st2.executeQuery(query1);
 

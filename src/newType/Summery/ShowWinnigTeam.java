@@ -23,8 +23,8 @@ public class ShowWinnigTeam {
     public String showTeam(String matchId) throws SQLException {
 
         Queries queries=new Queries();
-        String runsInOne=queries.setSummeryQueries(matchId);
-        String runsInTwo="select * from batting where inning=2 and matchid= "+matchId;
+        String runsInOne=queries.setSummeryQueriesOne(matchId);
+        String runsInTwo=queries.setSummeryQueriesTwo(matchId);
         java.sql.Statement stmt1 = con.createStatement();
         java.sql.Statement stmt2 = con.createStatement();
         ResultSet rs = stmt1.executeQuery(runsInOne);
